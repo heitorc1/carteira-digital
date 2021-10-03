@@ -19,6 +19,9 @@ module.exports = (sequelize, DataTypes) => {
     saldo: {
       type: Sequelize.FLOAT(8),
       allowNull: false,
+      validate: {
+        notEmpty: true,
+      }
     }
   }, {
     sequelize: sequelize,

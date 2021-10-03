@@ -37,7 +37,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     valor_transferido: {
       type: Sequelize.FLOAT(8),
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      }
     }
   }, {
     sequelize: sequelize,

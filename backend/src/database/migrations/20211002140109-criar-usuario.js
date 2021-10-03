@@ -10,7 +10,7 @@ module.exports = {
       },
       senha: {
         type: Sequelize.DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
       },
       nome: {
         type: Sequelize.DataTypes.STRING,

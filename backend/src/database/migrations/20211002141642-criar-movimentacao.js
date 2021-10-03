@@ -20,7 +20,6 @@ module.exports = {
         references: {
           model: {
             tableName: 'Usuario',
-            schema: 'public'
           },
           key: 'login'
         },
@@ -31,7 +30,6 @@ module.exports = {
         references: {
           model: {
             tableName: 'Usuario',
-            schema: 'public'
           },
           key: 'login'
         },
