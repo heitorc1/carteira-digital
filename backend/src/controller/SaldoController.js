@@ -9,14 +9,17 @@ const SaldoController = {
         const movimentacoes = await Movimentacao.findAll({
             where: {
                 login_origem: login
-            }
+            },
+            order: [
+                ['data', 'ASC']
+            ]
         })
         
         let valorSaldo = saldo.dataValues.saldo
         movimentacoes.forEach(transacao => {
              valorSaldo += transacao.dataValues.valor_transferido
         })
-        saldo.dataValues.saldo = valorSaldo
+        saldo.dataValues.saldo = valorSaldo.toFixed(2)
 
         return res.status(200).send(JSON.stringify(saldo))
     },

@@ -17,13 +17,10 @@ export default class Footer extends Component {
                 <Row className="justify-content-center pt-3">
                     <ul className="nav">
                         <li className="nav-item footer">
-                            Home
+                            <Link to="/extrato">Extrato</Link>
                         </li>
                         <li className="nav-item footer">
-                            Extrato
-                        </li>
-                        <li className="nav-item footer">
-                            Transferência
+                            <Link to="/transferencia">Transferência</Link>
                         </li>
                     </ul>
                 </Row>

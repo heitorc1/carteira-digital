@@ -1,0 +1,20 @@
+.form {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.button {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.button:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.text-muted {
+    margin-left: 0.25rem;
+    font-size: 1rem;
+    font-weight: 400;
+}

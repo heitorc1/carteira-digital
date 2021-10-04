@@ -1,6 +1,5 @@
-const { Usuario } = require('../models')
+const { Usuario, Saldo } = require('../models')
 const db = require('../models')
-// const  = require('../models')
 
 const UsuarioController = {
     async salvarUsuario(req, res) {
@@ -11,6 +10,11 @@ const UsuarioController = {
             nome
         })
         
+        const saldo = await Saldo.create({
+            login,
+            saldo: 100
+        })
+
         return res.status(200).send(JSON.stringify(usuario))
     },
 

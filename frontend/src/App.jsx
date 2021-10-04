@@ -1,22 +1,26 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Home from './views/pages/Home'
+import Transferencia from './views/pages/Transferencia'
+import Extrato from './views/pages/Extrato'
 import Login from './views/pages/Login'
-import Register from './views/pages/Register'
+import Registro from './views/pages/Registro'
 
 export default class App extends Component {
     render() {
         return (
             <Router>
                 <Switch>
-                    <Route path="/register">
-                        <Register></Register>
+                    <Route path="/registro">
+                        <Registro></Registro>
+                    </Route>
+                    <Route path="/extrato">
+                        <Extrato></Extrato>
+                    </Route>
+                    <Route path="/transferencia">
+                        <Transferencia></Transferencia>
                     </Route>
                     <Route path="/">
                         <Login></Login>
-                    </Route>
-                    <Route path="/home">
-                        <Home></Home>
                     </Route>
                 </Switch>
             </Router>
