@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: $DB_USER
+      POSTGRES_PASSWORD: $DB_PASSWORD
+      POSTGRES_DB: $DB_NAME
+    volumes:
+      - ./psdata:/var/lib/postgresql/data
+    ports:
+      - "15432:5432"
+
+  backend:
+    working_dir: /usr/app/api
+    entrypoint: ["/bin/bash", "./entrypoint.sh"]
+    image: node
+    ports:
+      - "8000:8000"
+    restart: always
+    volumes: 
+      - ./backend:/usr/app/api
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+    depends_on:
+      - postgres
+
+  frontend:
+    working_dir: /usr/app/frontend
+    entrypoint: ["/bin/bash", "./entrypoint.sh"]
+    image: node
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/usr/app/frontend
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+    depends_on:
+      - backend

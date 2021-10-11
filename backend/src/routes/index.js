@@ -1,19 +1,20 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
-const movimentacaoController = require('../controller/MovimentacaoController')
-const saldoController = require('../controller/SaldoController')
-const usuarioController = require('../controller/UsuarioController')
-const sessionController = require('../controller/SessionController')
+const transactionController = require("../controller/TransactionController");
+const balanceController = require("../controller/BalanceController");
+const userController = require("../controller/UserController");
+const sessionController = require("../controller/SessionController");
 
-router.post('/usuario', usuarioController.salvarUsuario)
-router.get('/usuario/:login', usuarioController.obterUsuario)
+router.post("/user", userController.saveUser);
+router.get("/user/:id", userController.getUser);
 
-router.get('/saldo/:login', saldoController.obterSaldo)
+router.get("/balance/:login", balanceController.getBalance);
+router.post("/balance", balanceController.saveBalance);
 
-router.post('/movimentacao', movimentacaoController.salvarMovimentacao)
-router.get('/extrato/:login', movimentacaoController.extrato)
+router.post("/transaction", transactionController.saveTransaction);
+// router.get("/extract/:login", transactionController.extract);
 
-router.post('/session', sessionController.store)
+// router.post("/session", sessionController.store);
 
 module.exports = router;

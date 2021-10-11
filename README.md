@@ -4,6 +4,8 @@
 
 Aplicação web de carteira digital
 
+## Último commit testado: 04/10/21
+
 ## Instalação backend
 
 
@@ -13,9 +15,11 @@ Dentro da pasta backend, instale as dependências:
 `npm install`
 
 Após configure o dcoker para rodar o backend com:
+
 `docker-compose up -d`
 
 Use os seguintes comandos para criar as tabelas e popular a tabela:
+
 `npx sequelize-cli db:migrate`
 
 `npx sequelize-cli db:seed:all`

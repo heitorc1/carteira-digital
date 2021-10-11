@@ -15,7 +15,8 @@
 # misc
 .DS_Store
 
-/backend/psdata
+# database data
+/psdata
 
 npm-debug.log*
 yarn-debug.log*

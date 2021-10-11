@@ -1,24 +1,24 @@
-const { Usuario } = require('../models')
+const { User } = require("../models");
 
 class SessionController {
-    async store(req, res) {
-        const { login, senha } = req.body
+  async store(req, res) {
+    const { login, password } = req.body;
 
-        const usuario = await Usuario.findByPk(login)
+    const user = await User.findByPk(login);
 
-        if(!usuario) {
-            return res.status(401).json({ message: 'Usuário não encontrado' })
-        }
-
-        if(!await usuario.checarSenha(senha)) {
-            return res.status(401).json({ message: 'Senha incorreta' })
-        }
-
-        return res.json({ 
-            usuario,
-            token: usuario.criarToken()
-        })
+    if (!user) {
+      return res.status(401).json({ message: "Usuário não encontrado" });
     }
+
+    if (!(await user.checarSenha(password))) {
+      return res.status(401).json({ message: "Senha incorreta" });
+    }
+
+    return res.json({
+      user,
+      token: user.criarToken(),
+    });
+  }
 }
 
-module.exports = new SessionController()
+module.exports = new SessionController();

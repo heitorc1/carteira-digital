@@ -1,14 +1,17 @@
-const { factory } = require('factory-girl')
-const { Usuario, Movimentacao } = require('../../src/models')
-const faker = require('faker-br')
+const { factory } = require("factory-girl");
+const { User, Balance } = require("../../src/models");
+const faker = require("faker");
+faker.locale = "pt_BR";
 
-factory.define('Usuario', Usuario, {
-    login: faker.internet.userName,
-    senha: faker.internet.password,
-    nome: faker.name.firstName
-})
+factory.define("User", User, {
+  login: faker.internet.userName(),
+  password: faker.internet.password(10),
+  name: faker.name.firstName(),
+});
 
-// factory.define('Movimentacao', )
+factory.define("Balance", Balance, {
+  login: faker.internet.userName(),
+  balance: faker.commerce.price(),
+});
 
-
-module.exports = factory
+module.exports = factory;
