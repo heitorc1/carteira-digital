@@ -62,7 +62,7 @@ describe("User : CRUD", () => {
     expect(response.status).toBe(422);
   });
 
-  it("it should get a user if id is valid", async () => {
+  it("it should get a user if login is valid", async () => {
     const user = await factory.create("User");
     const userResponse = await request(app).post("/user").send({
       login: user.login,
@@ -70,7 +70,7 @@ describe("User : CRUD", () => {
       name: user.name,
     });
 
-    const response = await request(app).get("/user/" + user.id);
+    const response = await request(app).get("/user/" + user.login);
 
     expect(response.status).toBe(200);
   });

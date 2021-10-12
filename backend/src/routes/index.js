@@ -6,11 +6,18 @@ const balanceController = require("../controller/BalanceController");
 const userController = require("../controller/UserController");
 const sessionController = require("../controller/SessionController");
 
-router.post("/user", userController.saveUser);
-router.get("/user/:id", userController.getUser);
+const userValidator = require("../middleware/userValidator");
+const balanceValidator = require("../middleware/balanceValidator");
 
-router.get("/balance/:login", balanceController.getBalance);
-router.post("/balance", balanceController.saveBalance);
+router.post("/user", userValidator.validateUser, userController.saveUser);
+router.get("/user/:login", userValidator.userExists, userController.getUser);
+
+router.get(
+  "/balance/:login",
+  userValidator.userExists,
+  balanceValidator.updateBalance,
+  balanceController.getBalance
+);
 
 router.post("/transaction", transactionController.saveTransaction);
 // router.get("/extract/:login", transactionController.extract);
