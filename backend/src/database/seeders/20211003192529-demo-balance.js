@@ -1,20 +1,22 @@
 "use strict";
-const SaldoController = require("../../controller/SaldoController");
-const UsuarioController = require("../../controller/UsuarioController");
+const BalanceService = require("../../services/BalanceService");
+const UserService = require("../../services/UserService");
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     const noBalance = [];
 
-    const users = await UsuarioController.obterTodosUsuarios();
+    const users = await UserService.getAllUsers();
 
     for (const user of users) {
       const person = user.dataValues.login;
-      const saldo = await SaldoController.saldo(person);
-      if (saldo === null) {
+      const currentBalance = await BalanceService.balance(person);
+      if (currentBalance === null) {
         const balance = {
           login: person,
-          saldo: 100,
+          balance: 100,
+          created_at: new Date(),
+          updated_at: new Date(),
         };
         noBalance.push(balance);
       }

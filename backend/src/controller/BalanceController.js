@@ -1,7 +1,5 @@
 const { Balance } = require("../models");
 
-const BalanceService = require("../services/BalanceService");
-
 const BalanceController = {
   async getBalance(req, res) {
     const login = req.params.login;

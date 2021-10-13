@@ -20,7 +20,11 @@ router.get(
 );
 
 router.post("/transaction", transactionController.saveTransaction);
-// router.get("/extract/:login", transactionController.extract);
+router.get(
+  "/extract/:login",
+  userValidator.userExists,
+  transactionController.extract
+);
 
 // router.post("/session", sessionController.store);
 

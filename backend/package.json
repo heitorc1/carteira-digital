@@ -6,7 +6,7 @@
     "start": "node src/server",
     "dev": "nodemon src/server --ignore __tests__",
     "pretest": "set NODE_ENV=test&& npx sequelize-cli db:migrate",
-    "test": "set NODE_ENV=test&& jest",
+    "test": "set NODE_ENV=test&& jest --runInBand",
     "posttest": "set NODE_ENV=test&& npx sequelize-cli db:migrate:undo:all"
   },
   "dependencies": {

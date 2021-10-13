@@ -3,10 +3,16 @@ const app = require("../../src/app");
 const factory = require("../utils/factory");
 const truncate = require("../utils/truncate");
 const bcrypt = require("bcryptjs");
+const { User } = require("../../src/models");
 
 describe("User : CRUD", () => {
   beforeEach(async () => {
     await truncate();
+    const admin = await User.create({
+      login: "admin",
+      password: "admin",
+      name: "System Admin",
+    });
   });
 
   it("it should create a valid user", async () => {
@@ -63,11 +69,11 @@ describe("User : CRUD", () => {
   });
 
   it("it should get a user if login is valid", async () => {
-    const user = await factory.create("User");
-    const userResponse = await request(app).post("/user").send({
-      login: user.login,
-      password: user.plainPassword,
-      name: user.name,
+    const newUser = await factory.build("User");
+    const user = await User.create({
+      login: newUser.login,
+      password: newUser.password,
+      name: newUser.name,
     });
 
     const response = await request(app).get("/user/" + user.login);

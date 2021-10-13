@@ -1,13 +1,21 @@
-const TransactionService = {
-  async extract(req, res) {
-    const { login } = req.params;
+const { Transaction } = require("../models");
 
-    const transactions = await Transaction.findAll({
+const TransactionService = {
+  async initialTransaction(login) {
+    const transactions = await Transaction.findOne({
       where: {
         login_source: login,
       },
     });
-    return res.status(200).send(JSON.stringify(transactions));
+    if (!transactions) {
+      const initialValue = {
+        login_source: "admin",
+        login_destination: login,
+        transaction_value: 100,
+        date: new Date(),
+      };
+      const initialTransaction = await Transaction.create(initialValue);
+    }
   },
 };
 

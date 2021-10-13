@@ -1,4 +1,5 @@
-const { User, Balance } = require("../models");
+const { User } = require("../models");
+const TransactionService = require("../services/TransactionService");
 
 const UserController = {
   async saveUser(req, res) {
@@ -6,10 +7,9 @@ const UserController = {
 
     const user = await User.create(data);
 
-    const balance = await Balance.create({
-      login: data.login,
-      balance: 100,
-    });
+    const firstTransaction = await TransactionService.initialTransaction(
+      data.login
+    );
 
     return res.status(200).send(JSON.stringify(user));
   },
