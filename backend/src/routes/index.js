@@ -9,6 +9,8 @@ const sessionController = require("../controller/SessionController");
 const userValidator = require("../middleware/userValidator");
 const balanceValidator = require("../middleware/balanceValidator");
 
+router.get('/', (req, res) => res.send('index'))
+
 router.post("/user", userValidator.validateUser, userController.saveUser);
 router.get("/user/:login", userValidator.userExists, userController.getUser);
 
@@ -26,6 +28,6 @@ router.get(
   transactionController.extract
 );
 
-// router.post("/session", sessionController.store);
+router.post("/session", sessionController.store);
 
 module.exports = router;

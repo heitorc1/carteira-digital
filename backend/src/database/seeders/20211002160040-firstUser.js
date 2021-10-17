@@ -9,15 +9,13 @@ module.exports = {
       },
     });
     if (!admin) {
-      return queryInterface.bulkInsert("Users", [
-        {
-          login: "admin",
-          password: "admin",
-          name: "System Admin",
-          created_at: new Date(),
-          updated_at: new Date(),
-        },
-      ]);
+      return User.create({
+        login: "admin",
+        password: "admin",
+        name: "System Admin",
+        created_at: new Date(),
+        updated_at: new Date(),
+      });
     } else {
       return false;
     }

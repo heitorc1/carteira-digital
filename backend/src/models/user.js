@@ -26,11 +26,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       hooks: {
-        beforeValidate: async (user) => {
-          user.plainPassword = user.password;
-        },
-        beforeCreate: async (user) => {
-          user.password = await bcrypt.hash(user.password, 8);
+        beforeSave: async (user) => {
+          if (user.password) {
+            user.plainPassword = user.password;
+            user.password = await bcrypt.hash(user.plainPassword, 8);
+          }
         },
       },
       sequelize,
@@ -39,8 +39,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  User.prototype.checkPassword = function (password) {
-    return bcrypt.compare(password, this.password);
+  User.prototype.checkPassword = async function (password) {
+    return await bcrypt.compare(password, this.password);
   };
 
   User.prototype.createToken = function () {

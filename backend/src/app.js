@@ -1,14 +1,13 @@
 require("dotenv").config({
-  path: process.env.NODE_ENV === "test" ? ".env.test" : ".env",
+  path: process.env.NODE_ENV === "test" ? '.env.test' : '.env',
 });
 
 const express = require("express");
-const path = require("path");
+
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const helmet = require("helmet");
 const cors = require("cors");
-
 const indexRouter = require("./routes");
 
 const app = express();

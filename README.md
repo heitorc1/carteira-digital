@@ -4,47 +4,15 @@
 
 Aplicação web de carteira digital
 
-## Último commit testado: 04/10/21
-
-## Instalação backend
+## Testar projeto
 
 
 
-Dentro da pasta backend, instale as dependências:
-
-`npm install`
-
-Após configure o dcoker para rodar o backend com:
+Para iniciar o projeto digite
 
 `docker-compose up -d`
 
-Use os seguintes comandos para criar as tabelas e popular a tabela:
-
-`npx sequelize-cli db:migrate`
-
-`npx sequelize-cli db:seed:all`
-
-Inicie o backend com:
-
-`npm start`
-
-Por padrão o backend será executado na porta 3030 e o banco de dados na 15432.
-
-
-
-## Instalação frontend
-
-
-
-Dentro da pasta frontend, instale as dependências:
-
-`npm install`
-
-Inicie o frontend com:
-
-`npm start`
-
-Por padrão o frontend será executado na porta 3000
+Por padrão, o backend roda na porta 8000, frontend na porta 3000 e banco de dados Postgres na porta 15432
 
 
 
@@ -54,15 +22,15 @@ Por padrão o frontend será executado na porta 3000
 
 #### POST - Criar usuário
 
-/usuario
+/user
 
-paramêtros: login, senha, nome
+parameters: login, password, name
 
 #### GET - Obter usuário
 
-/usuario/{login}
+/user/{login}
 
-paramêtro: login
+parameters: login
 
 
 
@@ -70,9 +38,9 @@ paramêtro: login
 
 #### GET - Obter saldo atual de usuário
 
-/saldo/{login}
+/balance/{login}
 
-paramêtros: login
+parameters: login
 
 
 
@@ -80,15 +48,15 @@ paramêtros: login
 
 #### POST - Criar nova movimentação
 
-/movimentacao
+/transaction
 
-paramêtros: login_origem, login_destino, valor_transferido
+parameters: login_source, login_destination, transaction_value
 
 #### GET - Obter todo histórico de movimentações
 
-/extrato/{login}
+/extract/{login}
 
-paramêtro: login
+parameters: login
 
 
 
@@ -98,4 +66,4 @@ paramêtro: login
 
 /session
 
-paramêtros: login, senha
+parameters: login, password

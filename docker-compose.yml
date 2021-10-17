@@ -2,6 +2,7 @@ version: "3.9"
 
 services:
   postgres:
+    container_name: postgres
     image: postgres
     restart: always
     environment:
@@ -12,3 +13,40 @@ services:
       - ./psdata:/var/lib/postgresql/data
     ports:
       - "15432:5432"
+
+  backend:
+    container_name: backend
+    working_dir: /usr/app/backend
+    entrypoint: ["/bin/bash", "./entrypoint.sh"]
+    image: node
+    restart: always
+    volumes:
+      - ./backend:/usr/app/backend
+      - ./.env:/usr/app/backend/.env
+    ports:
+      - "3333:3333"
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+      DB_HOST: $DB_HOST
+      DB_PORT: $DB_PORT
+      DB_USER: $DB_USER
+      DB_PASSWORD: $DB_PASSWORD
+      DB_NAME: $DB_NAME
+      DB_DIALECT: $DB_DIALECT
+    depends_on:
+      - postgres
+
+  frontend:
+    container_name: frontend
+    working_dir: /usr/app/frontend
+    entrypoint: ["/bin/bash", "./entrypoint.sh"]
+    image: node
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/usr/app/frontend
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+    depends_on:
+      - backend

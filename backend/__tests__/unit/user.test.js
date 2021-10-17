@@ -29,7 +29,6 @@ describe("User : CRUD", () => {
 
   it("it should encrypt the password", async () => {
     const user = await factory.create("User");
-
     const compareHash = await bcrypt.compare(user.plainPassword, user.password);
 
     expect(compareHash).toBe(true);

@@ -4,19 +4,22 @@ class SessionController {
   async store(req, res) {
     const { login, password } = req.body;
 
-    const user = await User.findByPk(login);
-
+    const user = await User.findOne({
+      where: {
+        login: login
+      }
+    });
     if (!user) {
-      return res.status(401).json({ message: "Usuário não encontrado" });
+      return res.status(401).json({ message: "User not found" });
     }
-
-    if (!(await user.checarSenha(password))) {
-      return res.status(401).json({ message: "Senha incorreta" });
+    const pwd = await user.checkPassword(password)
+    if (!pwd) {
+      return res.status(401).json({ message: "Incorret password" });
     }
 
     return res.json({
       user,
-      token: user.criarToken(),
+      token: user.createToken(),
     });
   }
 }
